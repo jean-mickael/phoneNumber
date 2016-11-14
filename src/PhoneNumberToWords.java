@@ -105,18 +105,18 @@ public class PhoneNumberToWords {
 	    }
 	}
 	
-	private void findWords(String input, String suffix, List<String> result) {
+	private void findWords(String input, String suffix, List<String> currentResults) {
         if (suffix.length() ==  0) {
-        	addResult(input, result);
+        	addResult(input, currentResults);
             return;
         }
 
         for (int i = 0; i < suffix.length(); i++) {
         	String word = suffix.substring(0,i+1);
         	if (dictionaryContains(word)) {
-            	result.add(word);
-            	findWords(input, suffix.substring(i+1), result);
-            	result.remove(result.size()-1);
+        		currentResults.add(word);
+            	findWords(input, suffix.substring(i+1), currentResults);
+            	currentResults.remove(currentResults.size()-1);
         	}
         }
     }
@@ -141,15 +141,15 @@ public class PhoneNumberToWords {
 		findWords2(digits, digits, "",  "", new ArrayList<String>());
 	}
 	
-	private void findWords2(String digits, String suffix, String currentWord, String key, List<String> result) {
+	private void findWords2(String digits, String suffix, String currentWord, String key, List<String> currentResults) {
         if (suffix.length() ==  0) {
-        	if (result == null || result.size() == 0){ 
+        	if (currentResults == null || currentResults.size() == 0){ 
         		return;
         	}
         	if (key.length() != digits.length()) {
         		return;
         	}
-        	addResult(key, result);
+        	addResult(key, currentResults);
             return;
         }
         
@@ -158,11 +158,11 @@ public class PhoneNumberToWords {
     	for (int letterCount = 0; letterCount<letters.length(); letterCount++) {
     		String word =  currentWord + letters.charAt(letterCount);
     		if (dictionaryContains(word)) {
-    			result.add(word);
-    			findWords2(digits, suffix.substring(1), "", key+word, result);
-    			result.remove(result.size()-1);
+    			currentResults.add(word);
+    			findWords2(digits, suffix.substring(1), "", key+word, currentResults);
+    			currentResults.remove(currentResults.size()-1);
     		} 
-    		findWords2(digits, suffix.substring(1), word, key, result);
+    		findWords2(digits, suffix.substring(1), word, key, currentResults);
     	}
     }
 	
