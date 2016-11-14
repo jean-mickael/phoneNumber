@@ -70,14 +70,10 @@ public class PhoneNumberToWords {
 	 */
 	public void findWords1(String digits) {
 		initialize();
-		//long startTime = System.currentTimeMillis();
-		//System.out.println("First search");
 		List<String> wordChoices = getLetterCombinations(digits);
 		for (String word:wordChoices) {
 			findWords(word, word, new ArrayList<String>());
 		}
-		//long endTime = System.currentTimeMillis();
-		//System.out.println("It took "+ (endTime-startTime)+"ms");
 	}
 
     /**
@@ -137,14 +133,12 @@ public class PhoneNumberToWords {
 	/**
 	 * This will be a dynamic search, we will look at the first
 	 * digit and explore each letter. If the letter is a word we will 
+	 * look for words in the remaining digits. Then we will look for
+	 * a word starting with that letter and the next digit
 	 */
 	public void findWords2(String digits) {
 		initialize();
-		//long startTime = System.currentTimeMillis();
-		//System.out.println("Second search");
 		findWords2(digits, digits, "",  "", new ArrayList<String>());
-		//long endTime = System.currentTimeMillis();
-		//System.out.println("It took "+ (endTime-startTime)+"ms");
 	}
 	
 	private void findWords2(String digits, String suffix, String currentWord, String key, List<String> result) {
