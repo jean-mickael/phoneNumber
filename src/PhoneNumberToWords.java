@@ -159,10 +159,8 @@ public class PhoneNumberToWords {
     		String word =  currentWord + letters.charAt(letterCount);
     		if (dictionaryContains(word)) {
     			result.add(word);
-    			key += word;
-    			findWords2(digits, suffix.substring(1), "", key, result);
+    			findWords2(digits, suffix.substring(1), "", key+word, result);
     			result.remove(result.size()-1);
-    			key = key.substring(0, key.length()-word.length());
     		} 
     		findWords2(digits, suffix.substring(1), word, key, result);
     	}
@@ -177,7 +175,7 @@ public class PhoneNumberToWords {
 				dictionary.findWords1(SEVEN_DIGITS);
 			}
 			long endTime = System.currentTimeMillis();
-			System.out.println(NUMBER_OF_RUNS+" runs for"+SEVEN_DIGITS+" using the first search took "+ (endTime-startTime)+"ms");
+			System.out.println(NUMBER_OF_RUNS+" runs for "+SEVEN_DIGITS+" using the first search took "+ (endTime-startTime)+"ms");
 			dictionary.displayResults(HIGUSTO);
 			
 			
@@ -188,7 +186,7 @@ public class PhoneNumberToWords {
 				dictionary.findWords2(SEVEN_DIGITS);
 			}
 			endTime = System.currentTimeMillis();
-			System.out.println(NUMBER_OF_RUNS+" runs for"+SEVEN_DIGITS+" using the second search took "+ (endTime-startTime)+"ms");
+			System.out.println(NUMBER_OF_RUNS+" runs for "+SEVEN_DIGITS+" using the second search took "+ (endTime-startTime)+"ms");
 			dictionary.displayResults(HIGUSTO);
 			
 			Map<String, List<String>> secondResults = dictionary.results;
@@ -200,7 +198,7 @@ public class PhoneNumberToWords {
 				dictionary.findWords1(TEN_DIGITS);
 			}
 			endTime = System.currentTimeMillis();
-			System.out.println(NUMBER_OF_RUNS+" runs for"+TEN_DIGITS+" using the first search took "+ (endTime-startTime)+"ms");
+			System.out.println(NUMBER_OF_RUNS+" runs for "+TEN_DIGITS+" using the first search took "+ (endTime-startTime)+"ms");
 			dictionary.displayResults(HELLOGUSTO);
 			
 			firstResults = dictionary.results;
@@ -210,7 +208,7 @@ public class PhoneNumberToWords {
 				dictionary.findWords2(TEN_DIGITS);
 			}
 			endTime = System.currentTimeMillis();
-			System.out.println(NUMBER_OF_RUNS+" runs for"+TEN_DIGITS+" using the second search took "+ (endTime-startTime)+"ms");
+			System.out.println(NUMBER_OF_RUNS+" runs for "+TEN_DIGITS+" using the second search took "+ (endTime-startTime)+"ms");
 			dictionary.displayResults(HELLOGUSTO);
 			
 			secondResults = dictionary.results;
