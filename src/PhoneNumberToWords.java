@@ -141,6 +141,14 @@ public class PhoneNumberToWords {
 		findWords2(digits, digits, "",  "", new ArrayList<String>());
 	}
 	
+	/**
+	 * 
+	 * @param digits is the original phone number
+	 * @param suffix is the phone number getting smaller while we search
+	 * @param currentWord is the word we are trying to find in the dictionary, if we find one it will be added to the result and become empty for the next word
+	 * @param key is the string representation of the digits we are building, it will end up being the key in our results map i.e. “hellogusto” 
+	 * @param currentResults is a list of words getting filled i.e. “hello”,”gusto”
+	 */
 	private void findWords2(String digits, String suffix, String currentWord, String key, List<String> currentResults) {
         if (suffix.length() ==  0) {
         	if (currentResults == null || currentResults.size() == 0){ 
@@ -153,8 +161,8 @@ public class PhoneNumberToWords {
             return;
         }
         
-        Integer curr = Integer.valueOf(suffix.charAt(0)+"");
-    	String letters = phoneLetters.get(curr);
+        Integer digit = Integer.valueOf(suffix.charAt(0)+"");
+    	String letters = phoneLetters.get(digit);
     	for (int letterCount = 0; letterCount<letters.length(); letterCount++) {
     		String word =  currentWord + letters.charAt(letterCount);
     		if (dictionaryContains(word)) {
